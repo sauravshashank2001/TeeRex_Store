@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Col, Form, Image, ListGroup, Row } from "react-bootstrap";
+import { Button, Col, FormControl, Image, ListGroup, ListGroupItem, Row } from "react-bootstrap";
 import { CartState } from "../Component2/Context";
 
 //Cart functionality
@@ -10,9 +10,11 @@ const Cart = () => {
   } = CartState();
   const [total, setTotal] = useState();
 
+  const [qty, setQty] = useState(1);
+
   useEffect(() => {
     setTotal(
-      cart.reduce((acc, curr) => acc + Number(curr.price) * curr.quantity, 0)
+      cart.reduce((acc, curr) => acc + Number(curr.price) * curr.qty, 0)
     );
   }, [cart]);
 
@@ -31,9 +33,9 @@ const Cart = () => {
                 </Col>
                 <Col md={2}>₹ {prod.price}</Col>
                 <Col md={2}>
-                  <Form.Control
+                  <FormControl
                     as="select"
-                    value={prod.quantity}
+                    value={prod.qty}
                     onChange={(e) =>
                       dispatch({
                         type: "CHANGE_CART_QTY",
@@ -44,10 +46,10 @@ const Cart = () => {
                       })
                     }
                   >
-                    {[...Array(prod.quantity>0).keys()].map((x) => (
+                    {[...Array(prod.quantity).keys()].map((x) => (
                       <option key={x+1}>{x + 1}</option>
                     ))}
-                  </Form.Control>
+                  </FormControl>
                 </Col>
                 <Col md={2}>
                   <Button

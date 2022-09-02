@@ -2,7 +2,7 @@ export default function cartReducer  (state, action){
     switch(action.type){
 
         case "ADD_TO_CART":
-            return{...state,cart:[...state.cart, {...action.payload, quantity: 1 }]};
+            return{...state,cart:[...state.cart, {...action.payload, qty: 1 }]};
         case "REMOVE_FROM_CART":
             return {
                 ...state,
@@ -11,11 +11,10 @@ export default function cartReducer  (state, action){
         case "CHANGE_CART_QTY":
             return {...state,
                 cart:state.cart.filter(c=>
-                c.id===action.payload.id?(c.qty=action.payload.qty):c.qty
+                c.id===action.payload.id?(c.qty=action.payload.qty):c.quantity
                 ),
             };
-        default:
-            return state;
+        
     }
 }
 

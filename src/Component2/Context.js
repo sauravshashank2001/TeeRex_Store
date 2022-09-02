@@ -5,20 +5,23 @@ import data from "../Component/data";
 const Cart=createContext();
 const Context =({children})=>{
    
-  useEffect(()=>{
-    fetchItems();
-  },[]);
+  // useEffect(()=>{
+  //   fetchItems();
+  // },[]);
 
+  const products = data;
 
-
-   const [items,setproducts]=useState([]);
-   const fetchItems=async()=>{
-    const data=await fetch(`https://geektrust.s3.ap-southeast-1.amazonaws.com/coding-problems/shopping-cart/catalogue.json`);
-    const items=await data.json();
-    setproducts(items);
-   };
+  //  const [products,setproducts]=useState([]);
+  //  const fetchItems=async()=>{
+  //  const data=await fetch(`https://geektrust.s3.ap-southeast-1.amazonaws.com/coding-problems/shopping-cart/catalogue.json`);
+  //  const items=await data.json();
+  //   setproducts(items);
+  //  };
+   
   
-   const products=data;
+   const items=[...products];
+   console.log(items);
+
   
     const [state, dispatch]=useReducer(cartReducer,{
         products: products,
